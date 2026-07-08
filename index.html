@@ -405,6 +405,219 @@
             color: var(--text-secondary);
         }
 
+        /* ENERGY COMPARISON & GREEN IT */
+        .energy-comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .energy-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .energy-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        .energy-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .energy-icon.homelab {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--color-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+        }
+
+        .energy-icon.classic {
+            background: rgba(244, 63, 94, 0.08);
+            color: var(--color-rose);
+            border: 1px solid rgba(244, 63, 94, 0.15);
+        }
+
+        .energy-icon.calculator {
+            background: rgba(99, 102, 241, 0.08);
+            color: var(--color-indigo);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+        }
+
+        .energy-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .energy-card-header p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .energy-metric-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .energy-metric {
+            text-align: center;
+        }
+
+        .energy-metric .val {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .energy-metric .lbl {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .energy-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .energy-features li {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 10px;
+            line-height: 1.4;
+        }
+
+        .energy-features i {
+            margin-top: 3px;
+            font-size: 0.85rem;
+        }
+
+        .energy-features i.fa-check {
+            color: var(--color-emerald);
+        }
+
+        .energy-features i.fa-xmark {
+            color: var(--color-rose);
+        }
+
+        .calculator-inputs {
+            margin-bottom: 16px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: var(--font-display);
+        }
+
+        .calc-input {
+            width: 100%;
+            padding: 10px 10px 10px 32px;
+            background: #03060d;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .calc-input:focus {
+            border-color: var(--color-indigo);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
+        }
+
+        .calc-results {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 16px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .result-row.highlighted {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            border-top: 1px dashed rgba(255, 255, 255, 0.03);
+            padding-top: 6px;
+            align-items: center;
+        }
+
+        .result-row.highlighted-annual {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            align-items: center;
+        }
+
+        .economy-badge {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--color-emerald);
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px dashed rgba(16, 185, 129, 0.2);
+            padding: 8px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .energy-comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* RACK VISUAL DESIGN */
         .server-diagram-card {
             background: rgba(10, 15, 30, 0.8);
@@ -1618,6 +1831,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#hero">Início</a></li>
                 <li><a href="#dashboard">NOC Dashboard</a></li>
+                <li><a href="#energia">Eficiência</a></li>
                 <li><a href="#topologia">Topologia</a></li>
                 <li><a href="#servidores">Servidores</a></li>
                 <li><a href="#equipamentos">Equipamentos</a></li>
@@ -1793,6 +2007,16 @@
                     </div>
                     <div class="metric-sub" style="color: var(--color-teal)">Economia Green IT</div>
                 </div>
+
+                <!-- CARD 6: Vigi Link Integration -->
+                <div class="glass-card metric-card vigi-link-card highlight-glow" id="vigiLinkCard">
+                    <div class="metric-icon-wrapper vigi-link-icon"><i class="fa-solid fa-link-slash"></i></div>
+                    <div>
+                        <div class="metric-value" id="vigiLinkStatus" style="font-size: 1.15rem; font-weight: 800;">OFFLINE</div>
+                        <div class="metric-label">Vigi NOC Link</div>
+                    </div>
+                    <button class="vigi-connect-btn" onclick="openVigiModal()">Conectar API</button>
+                </div>
             </div>
 
             <!-- Live Updating Charts -->
@@ -1811,6 +2035,108 @@
                         <div class="chart-val" id="chartNetVal">12.4 Mbps</div>
                     </div>
                     <canvas id="netChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENERGY EFFICIENCY & GREEN IT SECTION -->
+    <section id="energia">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">OTIMIZAÇÃO OPEX & GREEN IT</span>
+                <h2 class="section-title">Eficiência Energética e Custos de Operação</h2>
+                <p class="section-desc">Comparação de consumo e cálculo de economia mensal entre o nosso Homelab otimizado e uma sala de servidores tradicionais equivalentes.</p>
+            </div>
+
+            <div class="energy-comparison-grid">
+                <!-- Card 1: Our Lab -->
+                <div class="glass-card energy-card homelab-energy highlight-glow">
+                    <div class="energy-card-header">
+                        <div class="energy-icon homelab"><i class="fa-solid fa-leaf"></i></div>
+                        <div>
+                            <h3>Home Lab Otimizado</h3>
+                            <p>Hardware Desktop/Green IT</p>
+                        </div>
+                    </div>
+                    <div class="energy-metric-box">
+                        <div class="energy-metric">
+                            <span class="val">~188 W</span>
+                            <span class="lbl">Repouso (S.O. Idle)</span>
+                        </div>
+                        <div class="energy-metric">
+                            <span class="val">~990 W</span>
+                            <span class="lbl">Estresse Máximo (100%)</span>
+                        </div>
+                    </div>
+                    <ul class="energy-features">
+                        <li><i class="fa-solid fa-check"></i> <span>Componentes entram em C-States de baixo consumo (CPU usa ~4W ocioso).</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span>Controle térmico inteligente com fans de baixo ruído e curvas finas de rotação.</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span>Redução expressiva na emissão de calor, economizando refrigeração externa.</span></li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Enterprise Servers -->
+                <div class="glass-card energy-card classic-energy">
+                    <div class="energy-card-header">
+                        <div class="energy-icon classic"><i class="fa-solid fa-server"></i></div>
+                        <div>
+                            <h3>Servidores de Rack Clássicos</h3>
+                            <p>Hardware Xeon/Epyc Dedicado</p>
+                        </div>
+                    </div>
+                    <div class="energy-metric-box">
+                        <div class="energy-metric">
+                            <span class="val">~360 W</span>
+                            <span class="lbl">Repouso (S.O. Idle)</span>
+                        </div>
+                        <div class="energy-metric">
+                            <span class="val">~1090 W</span>
+                            <span class="lbl">Estresse Máximo (100%)</span>
+                        </div>
+                    </div>
+                    <ul class="energy-features">
+                        <li><i class="fa-solid fa-xmark"></i> <span>Placas corporativas e chips de controle IPMI possuem consumo base fixo alto.</span></li>
+                        <li><i class="fa-solid fa-xmark"></i> <span>Ventoinhas de alta rotação e chassi de rack consomem potência constante.</span></li>
+                        <li><i class="fa-solid fa-xmark"></i> <span>Fontes redundantes de grande escala perdem eficiência em baixa carga de repouso.</span></li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Interactive Calculator -->
+                <div class="glass-card energy-card calculator-card highlight-glow">
+                    <div class="energy-card-header">
+                        <div class="energy-icon calculator"><i class="fa-solid fa-calculator"></i></div>
+                        <div>
+                            <h3>Simulador de Economia</h3>
+                            <p>Calcule o OpEx na fatura real</p>
+                        </div>
+                    </div>
+                    <div class="calculator-inputs">
+                        <div class="input-group">
+                            <label for="kwhRate">Tarifa da Concessionária (R$ por kWh)</label>
+                            <div style="position: relative;">
+                                <span class="currency-symbol">R$</span>
+                                <input type="number" id="kwhRate" value="0.95" step="0.05" min="0.10" class="calc-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-results">
+                        <div class="result-row">
+                            <span>Diferença de Potência:</span>
+                            <span class="val" style="color: var(--color-teal)">- 172 W (ocioso)</span>
+                        </div>
+                        <div class="result-row highlighted">
+                            <span>Economia Mensal:</span>
+                            <span class="val" id="monthlySavings" style="color: var(--color-emerald)">R$ 0,00</span>
+                        </div>
+                        <div class="result-row highlighted-annual">
+                            <span>Economia Anual:</span>
+                            <span class="val" id="annualSavings" style="color: var(--color-teal)">R$ 0,00</span>
+                        </div>
+                    </div>
+                    <div class="economy-badge">
+                        <i class="fa-solid fa-circle-check"></i> <strong>-48%</strong> de Consumo Ocioso
+                    </div>
                 </div>
             </div>
         </div>
@@ -2990,6 +3316,7 @@
             
             // Add sections
             searchableItems.push({ name: "Seção: Dashboard de Monitoramento", type: "seção", link: "#dashboard" });
+            searchableItems.push({ name: "Seção: Eficiência Energética e Custos", type: "seção", link: "#energia" });
             searchableItems.push({ name: "Seção: Topologia Lógica de Rede", type: "seção", link: "#topologia" });
             searchableItems.push({ name: "Seção: Especificações dos Servidores", type: "seção", link: "#servidores" });
             searchableItems.push({ name: "Seção: Catálogo de Equipamentos", type: "seção", link: "#equipamentos" });
@@ -3299,6 +3626,315 @@
                 printToTerminal('Matrix rain desativado.', 'normal');
             }
         }
+
+        // 10. ENERGY CALCULATOR LOGIC
+        const kwhRateInput = document.getElementById('kwhRate');
+        const monthlySavingsEl = document.getElementById('monthlySavings');
+        const annualSavingsEl = document.getElementById('annualSavings');
+
+        function updateSavings() {
+            const rate = parseFloat(kwhRateInput.value) || 0.95;
+            
+            // 172W difference in idle
+            const kwhSavedPerDay = (172 * 24) / 1000; // 4.128 kWh
+            const kwhSavedPerMonth = kwhSavedPerDay * 30; // 123.84 kWh
+            
+            const monthlySavings = kwhSavedPerMonth * rate;
+            const annualSavings = monthlySavings * 12;
+            
+            monthlySavingsEl.textContent = `R$ ${monthlySavings.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            annualSavingsEl.textContent = `R$ ${annualSavings.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+
+        if (kwhRateInput) {
+            kwhRateInput.addEventListener('input', updateSavings);
+            // Run on load
+            setTimeout(updateSavings, 100);
+        }
+
+        // ==========================================
+        // 11. VIGI LIVE INTEGRATION
+        // ==========================================
+        let vigiInterval = null;
+        let isLiveActive = false;
+        let vigiToken = localStorage.getItem('vigi_token');
+        let vigiUrl = localStorage.getItem('vigi_url') || 'http://100.79.145.95:3030';
+
+        function openVigiModal() {
+            if (isLiveActive) {
+                disconnectVigi();
+                return;
+            }
+            document.getElementById('vigiModal').classList.add('active');
+        }
+
+        function closeVigiModal() {
+            document.getElementById('vigiModal').classList.remove('active');
+        }
+
+        async function connectVigiLive() {
+            const urlInput = document.getElementById('vigiUrl').value.trim();
+            const userInput = document.getElementById('vigiUser').value.trim();
+            const passInput = document.getElementById('vigiPass').value.trim();
+            const errorEl = document.getElementById('vigiError');
+            
+            errorEl.style.display = 'none';
+
+            try {
+                const response = await fetch(`${urlInput}/api/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user: userInput, pass: passInput })
+                });
+
+                const data = await response.json();
+                if (data.success && data.token) {
+                    vigiToken = data.token;
+                    vigiUrl = urlInput;
+                    localStorage.setItem('vigi_token', vigiToken);
+                    localStorage.setItem('vigi_url', vigiUrl);
+                    closeVigiModal();
+                    startVigiPolling();
+                } else {
+                    errorEl.style.display = 'block';
+                    errorEl.textContent = data.error || 'Credenciais inválidas!';
+                }
+            } catch (e) {
+                errorEl.style.display = 'block';
+                errorEl.textContent = 'Erro ao conectar à API Vigi: ' + e.message;
+            }
+        }
+
+        function startVigiPolling() {
+            isLiveActive = true;
+            const card = document.getElementById('vigiLinkCard');
+            const statusText = document.getElementById('vigiLinkStatus');
+            const connectBtn = card.querySelector('.vigi-connect-btn');
+            const icon = card.querySelector('.metric-icon-wrapper i');
+
+            card.classList.add('live-active');
+            statusText.textContent = 'LIVE ONLINE';
+            statusText.style.color = '#c084fc';
+            connectBtn.textContent = 'Desconectar';
+            icon.className = 'fa-solid fa-broadcast-tower';
+
+            fetchVigiData(); // first fetch immediately
+            vigiInterval = setInterval(fetchVigiData, 3000); // update every 3s
+        }
+
+        function disconnectVigi() {
+            isLiveActive = false;
+            clearInterval(vigiInterval);
+            vigiToken = null;
+            localStorage.removeItem('vigi_token');
+
+            const card = document.getElementById('vigiLinkCard');
+            const statusText = document.getElementById('vigiLinkStatus');
+            const connectBtn = card.querySelector('.vigi-connect-btn');
+            const icon = card.querySelector('.metric-icon-wrapper i');
+
+            card.classList.remove('live-active');
+            statusText.textContent = 'OFFLINE';
+            statusText.style.color = '';
+            connectBtn.textContent = 'Conectar API';
+            icon.className = 'fa-solid fa-link-slash';
+            
+            // Restore demo mode defaults or reload page to clean state
+            window.location.reload();
+        }
+
+        async function fetchVigiData() {
+            if (!isLiveActive || !vigiToken) return;
+
+            try {
+                const response = await fetch(`${vigiUrl}/api/status`, {
+                    headers: { 'Authorization': `Bearer ${vigiToken}` }
+                });
+
+                if (response.status === 401) {
+                    disconnectVigi();
+                    return;
+                }
+
+                const servers = await response.json();
+                updateNocDashboardWithLive(servers);
+            } catch (e) {
+                console.error('Error fetching Vigi status:', e);
+                document.getElementById('vigiLinkStatus').textContent = 'API ERR';
+                document.getElementById('vigiLinkStatus').style.color = 'var(--color-rose)';
+            }
+        }
+
+        function updateNocDashboardWithLive(servers) {
+            // Locate servers in results
+            const srv1 = servers.find(s => s.ip === '100.79.145.95');
+            const srv2 = servers.find(s => s.ip === '100.65.93.99');
+            const srv3 = servers.find(s => s.ip === '100.105.2.116');
+
+            if (!srv1) return;
+
+            // 1. CPU Card (Workstation)
+            const cpuVal = srv1.cpuUsage;
+            document.getElementById('chartCpuVal').textContent = `${cpuVal}%`;
+            // Update CPU metric card
+            const cpuCard = document.querySelector('.dashboard-grid .metric-card:nth-child(1)');
+            if (cpuCard) {
+                cpuCard.querySelector('.metric-value').textContent = `${cpuVal}%`;
+                cpuCard.querySelector('.progress-bar-fill').style.width = `${cpuVal}%`;
+            }
+
+            // 2. RAM Card (Aggregate)
+            let totalRam = (srv1.ramTotalGB || 48) + (srv2 ? (srv2.ramTotalGB || 24) : 24) + (srv3 ? (srv3.ramTotalGB || 6) : 6);
+            let usedRam1 = ((srv1.ramUsage / 100) * (srv1.ramTotalGB || 48));
+            let usedRam2 = srv2 ? ((srv2.ramUsage / 100) * (srv2.ramTotalGB || 24)) : 0;
+            let usedRam3 = srv3 ? ((srv3.ramUsage / 100) * (srv3.ramTotalGB || 6)) : 0;
+            let totalUsedRam = usedRam1 + usedRam2 + usedRam3;
+            let ramPct = (totalUsedRam / totalRam) * 100;
+            
+            const ramCard = document.querySelector('.dashboard-grid .metric-card:nth-child(3)');
+            if (ramCard) {
+                ramCard.querySelector('.metric-value').textContent = `${totalUsedRam.toFixed(1)} GB`;
+                ramCard.querySelector('.metric-sub').textContent = `${totalUsedRam.toFixed(1)} GB em Uso / ${totalRam} GB`;
+                ramCard.querySelector('.progress-bar-fill').style.width = `${ramPct}%`;
+            }
+
+            // 3. Network Card (Workstation RX/TX)
+            const rxMbps = (srv1.rxSec || 0) * 8 / 1024 / 1024;
+            const txMbps = (srv1.txSec || 0) * 8 / 1024 / 1024;
+            const netTraffic = rxMbps + txMbps;
+            document.getElementById('chartNetVal').textContent = `${netTraffic.toFixed(1)} Mbps`;
+            
+            const netCard = document.querySelector('.dashboard-grid .metric-card:nth-child(2)');
+            if (netCard) {
+                netCard.querySelector('.metric-value').textContent = `${netTraffic.toFixed(1)} Mbps`;
+                netCard.querySelector('.metric-sub').textContent = `RX: ${rxMbps.toFixed(1)}M / TX: ${txMbps.toFixed(1)}M`;
+                netCard.querySelector('.progress-bar-fill').style.width = `${Math.min(100, (netTraffic/1000)*100)}%`;
+            }
+
+            // 4. Storage Card (Aggregate Disks)
+            let totalStorage = 0;
+            let usedStorage = 0;
+            servers.forEach(s => {
+                if (s.disks) {
+                    s.disks.forEach(d => {
+                        totalStorage += d.totalGB || 0;
+                        usedStorage += d.usedGB || 0;
+                    });
+                }
+            });
+            // Convert to TB
+            const totalStorageTB = totalStorage / 1024;
+            const usedStorageTB = usedStorage / 1024;
+            const freeStorageTB = (totalStorage - usedStorage) / 1024;
+            const storagePct = (usedStorage / totalStorage) * 100;
+
+            const storageCard = document.querySelector('.dashboard-grid .metric-card:nth-child(4)');
+            if (storageCard) {
+                storageCard.querySelector('.metric-value').textContent = `${totalStorageTB.toFixed(1)} TB`;
+                storageCard.querySelector('.metric-sub').textContent = `${freeStorageTB.toFixed(1)} TB Livre / ${servers.reduce((acc, s) => acc + (s.disks ? s.disks.length : 0), 0)} HDs`;
+                storageCard.querySelector('.progress-bar-fill').style.width = `${storagePct}%`;
+            }
+
+            // 5. Power Card
+            let cpuPower1 = srv1.cpuPower || 0;
+            let cpuPower2 = srv2 ? (srv2.cpuPower || 0) : 0;
+            let gpuPower1 = srv1.gpuPower || 0;
+            let gpuPower2 = srv2 ? (srv2.gpuPower || 0) : 0;
+            let totalPower = cpuPower1 + cpuPower2 + gpuPower1 + gpuPower2 + 40; // add baseline motherboards/disks
+            
+            const powerCard = document.querySelector('.dashboard-grid .metric-card:nth-child(5)');
+            if (powerCard) {
+                powerCard.querySelector('.metric-value').textContent = `~${parseInt(totalPower)} W`;
+                powerCard.querySelector('.metric-sub').textContent = 'Consumo Real (Vigi)';
+            }
+
+            // 6. Update Nível Cards in DOM
+            // Server 1
+            const srv1Card = document.getElementById('srv-principal-card');
+            if (srv1Card) {
+                srv1Card.querySelector('.specs-list li:nth-child(1) span').innerHTML = `<b>CPU Usage</b>: ${srv1.cpuUsage}% | Temp: ${srv1.cpuTemp}°C`;
+                srv1Card.querySelector('.specs-list li:nth-child(3) span').innerHTML = `<b>RAM</b>: ${((srv1.ramUsage/100)*(srv1.ramTotalGB || 48)).toFixed(1)}GB / ${srv1.ramTotalGB || 48}GB (${srv1.ramUsage}%)`;
+                srv1Card.querySelector('.specs-list li:nth-child(4) span').innerHTML = `<b>Uptime</b>: ${(srv1.uptime/3600).toFixed(1)} horas`;
+                
+                // Active disks preview
+                const disksText = srv1.disks ? srv1.disks.map(d => d.letter + ':\\').join(', ') : 'N/A';
+                srv1Card.querySelector('.specs-list li:nth-child(5) span').innerHTML = `<b>Discos Ativos</b>: ${disksText}`;
+            }
+
+            // Server 2
+            if (srv2) {
+                const srv2Card = document.getElementById('srv-bancada-card');
+                if (srv2Card) {
+                    srv2Card.querySelector('.specs-list li:nth-child(1) span').innerHTML = `<b>CPU Usage</b>: ${srv2.cpuUsage}% | Temp: ${srv2.cpuTemp ? srv2.cpuTemp.toFixed(1) : srv2.cpuTemp}°C`;
+                    srv2Card.querySelector('.specs-list li:nth-child(3) span').innerHTML = `<b>RAM</b>: ${((srv2.ramUsage/100)*(srv2.ramTotalGB || 24)).toFixed(1)}GB / ${srv2.ramTotalGB || 24}GB (${srv2.ramUsage}%)`;
+                    srv2Card.querySelector('.specs-list li:nth-child(4) span').innerHTML = `<b>GPU Temp</b>: ${srv2.gpuTemp}°C | Load: ${srv2.gpuLoad}%`;
+                }
+            }
+
+            // Server 3
+            if (srv3) {
+                const srv3Card = document.getElementById('srv-backup-card');
+                if (srv3Card) {
+                    srv3Card.querySelector('.specs-list li:nth-child(1) span').innerHTML = `<b>CPU Usage</b>: ${srv3.cpuUsage}% | Temp: ${srv3.cpuTemp}°C`;
+                    srv3Card.querySelector('.specs-list li:nth-child(3) span').innerHTML = `<b>RAM</b>: ${((srv3.ramUsage/100)*(srv3.ramTotalGB || 6)).toFixed(1)}GB / ${srv3.ramTotalGB || 6}GB (${srv3.ramUsage}%)`;
+                }
+            }
+
+            // Update Topology Node Styles depending on live status
+            updateNodeStatus('node-serv1', srv1.status);
+            updateNodeStatus('node-serv2', srv2 ? srv2.status : 'offline');
+            updateNodeStatus('node-serv3', srv3 ? srv3.status : 'offline');
+        }
+
+        function updateNodeStatus(nodeId, status) {
+            const el = document.getElementById(nodeId);
+            if (!el) return;
+            const circle = el.querySelector('.node-bg');
+            if (!circle) return;
+
+            if (status === 'online') {
+                circle.style.stroke = 'var(--color-emerald)';
+                circle.style.fill = 'rgba(16, 185, 129, 0.15)';
+            } else if (status === 'offline') {
+                circle.style.stroke = 'var(--color-rose)';
+                circle.style.fill = 'rgba(244, 63, 94, 0.15)';
+            } else {
+                circle.style.stroke = 'var(--color-amber)';
+                circle.style.fill = 'rgba(245, 158, 11, 0.15)';
+            }
+        }
+
+        // Check if token exists on load to auto-connect
+        if (vigiToken) {
+            setTimeout(startVigiPolling, 500);
+        }
     </script>
+    <!-- VIGI NOC LINK CONNECTION MODAL -->
+    <div class="vigi-modal" id="vigiModal">
+        <div class="vigi-modal-content glass-card">
+            <div class="vigi-modal-header">
+                <div class="vigi-modal-title">
+                    <i class="fa-solid fa-circle-nodes" style="color: var(--color-indigo)"></i>
+                    Conectar Vigi API
+                </div>
+                <button class="vigi-modal-close" onclick="closeVigiModal()">&times;</button>
+            </div>
+            <div class="vigi-form-group">
+                <label for="vigiUrl">URL do Servidor Vigi (Tailscale/Local)</label>
+                <input type="text" id="vigiUrl" class="vigi-form-input" value="http://100.79.145.95:3030">
+            </div>
+            <div class="vigi-form-group">
+                <label for="vigiUser">Usuário do Painel</label>
+                <input type="text" id="vigiUser" class="vigi-form-input" value="Erick Finger">
+            </div>
+            <div class="vigi-form-group">
+                <label for="vigiPass">Senha de Acesso</label>
+                <input type="password" id="vigiPass" class="vigi-form-input" value="@324354Erk!">
+            </div>
+            <div class="vigi-error-msg" id="vigiError">Credenciais inválidas!</div>
+            <button class="vigi-modal-btn" onclick="connectVigiLive()">Autenticar & Conectar</button>
+        </div>
+    </div>
+
 </body>
 </html>
