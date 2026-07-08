@@ -97,6 +97,11 @@
             padding: 90px 0;
             border-bottom: 1px solid var(--border-color);
             position: relative;
+            scroll-margin-top: 100px;
+        }
+
+        #arquitetura {
+            scroll-margin-top: 120px;
         }
 
         .section-header {
@@ -179,14 +184,33 @@
         header.nav-header {
             position: fixed;
             top: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
+            max-width: 100%;
             z-index: 1000;
-            background: rgba(6, 9, 19, 0.8);
+            background: rgba(6, 9, 19, 0.82);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
-            transition: var(--transition-smooth);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Sticky Floating Dock transition for Desktop */
+        @media (min-width: 1025px) {
+            header.nav-header.scrolled {
+                top: 16px;
+                width: 92%;
+                max-width: 1300px;
+                height: 64px;
+                border-radius: 18px;
+                background: rgba(6, 9, 19, 0.75);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(99, 102, 241, 0.15);
+            }
+            header.nav-header.scrolled .nav-container {
+                height: 64px;
+            }
         }
 
         .nav-container {
@@ -194,92 +218,202 @@
             align-items: center;
             justify-content: space-between;
             height: 80px;
+            transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%;
+            max-width: 1400px !important;
+            padding: 0 32px !important;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-family: var(--font-display);
             font-weight: 900;
             font-size: 1.4rem;
             color: var(--text-primary);
             text-decoration: none;
             letter-spacing: -0.04em;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .logo i {
             color: var(--color-indigo);
-            filter: drop-shadow(0 0 10px var(--color-indigo));
+            filter: drop-shadow(0 0 8px var(--color-indigo));
+            animation: logo-pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes logo-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--color-indigo)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 12px var(--color-indigo)); transform: scale(1.05); }
         }
 
         .logo span {
             color: var(--color-teal);
+            font-family: var(--font-mono);
+            margin-left: 2px;
+            opacity: 0.85;
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 20px;
             list-style: none;
+            white-space: nowrap;
+        }
+
+        .nav-links li {
+            position: relative;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.82rem;
+            font-weight: 600;
             transition: var(--transition-smooth);
-            padding: 6px 0;
+            padding: 8px 0;
             display: block;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-indigo), var(--color-teal));
+            transition: var(--transition-smooth);
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
 
         .nav-links a:hover {
             color: var(--text-primary);
         }
 
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        /* Active Link State */
+        .nav-links a.active {
+            color: var(--text-primary);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+            background: linear-gradient(90deg, var(--color-indigo), var(--color-teal));
+            box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Small active dot under link */
+        .nav-links a.active::before {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background-color: var(--color-teal);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 6px var(--color-teal);
+            animation: active-dot-pulse 2s infinite;
+        }
+
+        @keyframes active-dot-pulse {
+            0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.3); }
+        }
+
         .search-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            padding: 6px 12px;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 14px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--text-secondary);
             font-family: var(--font-mono);
             transition: var(--transition-smooth);
+            white-space: nowrap;
+        }
+
+        .search-badge span {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 0.7rem;
         }
 
         .search-badge:hover {
-            border-color: var(--color-indigo);
-            background: rgba(99, 102, 241, 0.05);
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(99, 102, 241, 0.08);
             color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
         }
 
         .system-status-indicator {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(16, 185, 129, 0.08);
-            border: 1px solid rgba(16, 185, 129, 0.2);
             padding: 6px 14px;
             border-radius: 99px;
             font-family: var(--font-mono);
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--color-emerald);
+            white-space: nowrap;
+            transition: var(--transition-smooth);
+        }
+
+        .status-dot-container {
+            position: relative;
+            width: 8px;
+            height: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .status-dot {
             width: 8px;
             height: 8px;
-            background-color: var(--color-emerald);
             border-radius: 50%;
-            position: relative;
-            animation: pulse-green 2.5s infinite;
+            z-index: 2;
+        }
+
+        .status-pulse-ring-1 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .status-pulse-ring-2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        @keyframes status-pulse-anim {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(3.5); opacity: 0; }
         }
 
         .menu-toggle {
@@ -1037,6 +1171,9 @@
             font-size: 11px;
             font-weight: 600;
             text-anchor: middle;
+        }
+        .node-text-right {
+            text-anchor: start !important;
         }
         .node-icon {
             fill: var(--text-secondary);
@@ -1915,27 +2052,72 @@
             .topology-grid { grid-template-columns: 1fr; }
             .lightbox-arrow-left { left: 12px; }
             .lightbox-arrow-right { right: 12px; }
+
+            /* Navigation Mobile Menu Drawer */
+            .nav-links {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(6, 9, 19, 0.96);
+                backdrop-filter: blur(24px);
+                -webkit-backdrop-filter: blur(24px);
+                flex-direction: column;
+                padding: 0 24px;
+                border-bottom: 1px solid var(--border-color);
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                max-height: 520px;
+                opacity: 1;
+                padding: 24px;
+                gap: 12px;
+            }
+
+            .nav-links a {
+                padding: 10px 0;
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+                font-size: 0.9rem;
+            }
+
+            .nav-links li:last-child a {
+                border-bottom: none;
+            }
+
+            /* Remove desktop active elements on mobile to avoid clutter */
+            .nav-links a::after,
+            .nav-links a.active::before,
+            .nav-links a.active::after {
+                display: none !important;
+            }
+
+            .nav-links a.active {
+                color: var(--color-teal);
+                padding-left: 10px;
+                border-left: 2px solid var(--color-teal);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .system-status-indicator {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
             .hero-grid { grid-template-columns: 1fr; gap: 36px; }
             .hero-title { font-size: 2.5rem; }
             .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: #060913;
-                flex-direction: column;
-                padding: 24px;
-                border-bottom: 1px solid var(--border-color);
-                gap: 16px;
-            }
-            .nav-links.active { display: flex; }
-            .menu-toggle { display: block; }
-            .system-status-indicator { display: none; }
         }
 
         @media (max-width: 480px) {
@@ -1943,6 +2125,169 @@
             .hero-infra-metrics { grid-template-columns: 1fr; gap: 20px; }
             .hero-actions { flex-direction: column; width: 100%; }
             .btn { width: 100%; }
+        }
+
+        /* VIGI NOC LINK CONNECTION MODAL STYLES */
+        .vigi-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(3, 5, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .vigi-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .vigi-modal-content {
+            width: 90%;
+            max-width: 440px;
+            background: rgba(10, 15, 30, 0.85) !important;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(99, 102, 241, 0.15);
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .vigi-modal.active .vigi-modal-content {
+            transform: translateY(0) scale(1);
+        }
+        
+        .vigi-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 16px;
+        }
+        
+        .vigi-modal-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .vigi-modal-title i {
+            font-size: 1.1rem;
+            color: var(--color-indigo);
+            filter: drop-shadow(0 0 6px var(--color-indigo));
+        }
+        
+        .vigi-modal-close {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .vigi-modal-close:hover {
+            background: rgba(244, 63, 94, 0.1);
+            border-color: rgba(244, 63, 94, 0.3);
+            color: var(--color-rose);
+            transform: rotate(90deg);
+        }
+        
+        .vigi-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .vigi-form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            letter-spacing: 0.02em;
+        }
+        
+        .vigi-form-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 16px;
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.88rem;
+            font-family: var(--font-body);
+            transition: var(--transition-smooth);
+        }
+        
+        .vigi-form-input:focus {
+            outline: none;
+            border-color: var(--color-indigo);
+            background: rgba(99, 102, 241, 0.04);
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
+        }
+        
+        .vigi-error-msg {
+            display: none;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--color-rose);
+            background: rgba(244, 63, 94, 0.08);
+            border: 1px solid rgba(244, 63, 94, 0.15);
+            padding: 10px 14px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-family: var(--font-mono);
+        }
+        
+        .vigi-modal-btn {
+            width: 100%;
+            background: linear-gradient(90deg, var(--color-indigo), #5b21b6);
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.88rem;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.5);
+        }
+        
+        .vigi-modal-btn:hover {
+            background: linear-gradient(90deg, #5b21b6, var(--color-indigo));
+            box-shadow: 0 8px 25px -4px rgba(99, 102, 241, 0.6);
+            transform: translateY(-1px);
+        }
+        
+        .vigi-modal-btn:active {
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -1974,8 +2319,13 @@
                 <div class="search-badge" onclick="toggleCmdPalette(true)">
                     <i class="fa-solid fa-magnifying-glass"></i> <span>Ctrl+K</span>
                 </div>
-                <div class="system-status-indicator" style="background: rgba(99, 102, 241, 0.08); border-color: rgba(99, 102, 241, 0.2); color: #a5b4fc;">
-                    <span class="status-dot" style="background-color: var(--color-indigo); animation-name: pulse-indigo;"></span> TUDO EM VPN
+                <div class="system-status-indicator" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); color: #a5b4fc;">
+                    <div class="status-dot-container">
+                        <div class="status-dot" style="background-color: var(--color-indigo);"></div>
+                        <div class="status-pulse-ring-1" style="background-color: var(--color-indigo); animation: status-pulse-anim 2s infinite ease-out;"></div>
+                        <div class="status-pulse-ring-2" style="background-color: var(--color-indigo); animation: status-pulse-anim 2s infinite ease-out 0.8s;"></div>
+                    </div>
+                    <i class="fa-solid fa-shield-halved" style="font-size: 0.8rem; margin-right: 2px; color: #a5b4fc;"></i> TUDO EM VPN
                 </div>
                 <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
                     <i class="fa-solid fa-bars"></i>
@@ -2020,7 +2370,7 @@
             </div>
             
             <div class="hero-art-container">
-                <div class="server-diagram-card highlight-glow">
+                <div class="server-diagram-card highlight-glow" id="arquitetura">
                     <div class="server-rack-visual">
                         <!-- LEVEL 1 -->
                         <div class="rack-unit level-1">
@@ -2328,57 +2678,57 @@
                             <!-- NODE 1: Internet -->
                             <g class="node-group" onclick="selectNode('internet')" id="node-internet">
                                 <circle cx="80" cy="200" r="28" class="node-bg"></circle>
-                                <text x="80" y="196" class="node-icon">&#xf0c2;</text>
-                                <text x="80" y="215" class="node-text">INTERNET</text>
+                                <text x="80" y="205" class="node-icon">&#xf0c2;</text>
+                                <text x="80" y="245" class="node-text">INTERNET</text>
                             </g>
 
                             <!-- NODE 2: Router/Firewall -->
                             <g class="node-group" onclick="selectNode('router')" id="node-router">
                                 <circle cx="190" cy="200" r="28" class="node-bg"></circle>
-                                <text x="190" y="196" class="node-icon">&#xf13e;</text>
-                                <text x="190" y="215" class="node-text">GATEWAY</text>
+                                <text x="190" y="205" class="node-icon">&#xf13e;</text>
+                                <text x="190" y="245" class="node-text">GATEWAY</text>
                             </g>
 
                             <!-- NODE 3: Switch -->
                             <g class="node-group" onclick="selectNode('switch')" id="node-switch">
                                 <circle cx="330" cy="200" r="32" class="node-bg"></circle>
-                                <text x="330" y="195" class="node-icon">&#xf6ff;</text>
-                                <text x="330" y="216" class="node-text">SWITCH 5P</text>
+                                <text x="330" y="205" class="node-icon">&#xf6ff;</text>
+                                <text x="330" y="249" class="node-text">SWITCH 5P</text>
                             </g>
 
                             <!-- NODE 4: Servidor Principal (Level 1) -->
                             <g class="node-group" onclick="selectNode('serv1')" id="node-serv1">
                                 <circle cx="480" cy="90" r="28" class="node-bg"></circle>
-                                <text x="480" y="86" class="node-icon">&#xf233;</text>
-                                <text x="480" y="105" class="node-text">I7-NIVEL1</text>
+                                <text x="480" y="95" class="node-icon">&#xf233;</text>
+                                <text x="518" y="94" class="node-text node-text-right">I7-NIVEL1</text>
                             </g>
 
                             <!-- NODE 5: Servidor Secundario (Level 2) -->
                             <g class="node-group" onclick="selectNode('serv2')" id="node-serv2">
                                 <circle cx="480" cy="200" r="28" class="node-bg"></circle>
-                                <text x="480" y="196" class="node-icon">&#xf233;</text>
-                                <text x="480" y="215" class="node-text">R7-NIVEL2</text>
+                                <text x="480" y="205" class="node-icon">&#xf233;</text>
+                                <text x="518" y="204" class="node-text node-text-right">R7-NIVEL2</text>
                             </g>
 
                             <!-- NODE 6: Servidor Terciario (Level 3) -->
                             <g class="node-group" onclick="selectNode('serv3')" id="node-serv3">
                                 <circle cx="480" cy="310" r="28" class="node-bg"></circle>
-                                <text x="480" y="306" class="node-icon">&#xf233;</text>
-                                <text x="480" y="325" class="node-text">I5-NIVEL3</text>
+                                <text x="480" y="315" class="node-icon">&#xf233;</text>
+                                <text x="518" y="314" class="node-text node-text-right">I5-NIVEL3</text>
                             </g>
 
                             <!-- NODE 7: Workstation Setup -->
                             <g class="node-group" onclick="selectNode('workstation')" id="node-workstation">
                                 <circle cx="200" cy="320" r="28" class="node-bg"></circle>
-                                <text x="200" y="316" class="node-icon">&#xf109;</text>
-                                <text x="200" y="335" class="node-text">WORKSPACE</text>
+                                <text x="200" y="325" class="node-icon">&#xf109;</text>
+                                <text x="200" y="365" class="node-text">WORKSPACE</text>
                             </g>
 
                             <!-- NODE 8: VPN Segura -->
                             <g class="node-group" onclick="selectNode('vpn')" id="node-vpn">
                                 <circle cx="480" cy="40" r="24" class="node-bg"></circle>
-                                <text x="480" y="36" class="node-icon">&#xf3ed;</text>
-                                <text x="480" y="52" class="node-text">VPN SEGURA</text>
+                                <text x="480" y="45" class="node-icon">&#xf3ed;</text>
+                                <text x="514" y="44" class="node-text node-text-right">VPN SEGURA</text>
                             </g>
                         </svg>
                     </div>
@@ -2909,6 +3259,74 @@
 
         initMesh();
         drawMesh();
+
+        // ==========================================
+        // 1. STICKY HEADER & SCROLLSPY LOGIC
+        // ==========================================
+        const navHeaderEl = document.querySelector('.nav-header');
+        const navLinksList = document.querySelectorAll('.nav-links a');
+        
+        // Sticky Header Transition
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                navHeaderEl.classList.add('scrolled');
+            } else {
+                navHeaderEl.classList.remove('scrolled');
+            }
+        });
+
+        // ScrollSpy (IntersectionObserver)
+        const scrollSpySections = [
+            document.getElementById('hero'),
+            document.getElementById('arquitetura'),
+            document.getElementById('dashboard'),
+            document.getElementById('energia'),
+            document.getElementById('topologia'),
+            document.getElementById('servidores'),
+            document.getElementById('equipamentos'),
+            document.getElementById('galeria'),
+            document.getElementById('diagnostico')
+        ].filter(el => el !== null);
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -55% 0px', // Trigger when section occupies the upper-middle of viewport
+            threshold: 0.05
+        };
+
+        const intersectingSections = {};
+
+        const spyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                intersectingSections[entry.target.getAttribute('id')] = entry.isIntersecting;
+            });
+
+            // Evaluate active section based on priority order
+            let activeId = null;
+            const sectionOrder = ['hero', 'arquitetura', 'dashboard', 'energia', 'topologia', 'servidores', 'equipamentos', 'galeria', 'diagnostico'];
+            
+            for (const id of sectionOrder) {
+                if (intersectingSections[id]) {
+                    activeId = id;
+                    // Resolve overlap: if both hero and architecture are visible, prioritize architecture
+                    if (id === 'hero' && intersectingSections['arquitetura']) {
+                        activeId = 'arquitetura';
+                    }
+                }
+            }
+
+            if (activeId) {
+                navLinksList.forEach(link => {
+                    if (link.getAttribute('href') === `#${activeId}`) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+        }, observerOptions);
+
+        scrollSpySections.forEach(section => spyObserver.observe(section));
 
         // 2. MOBILE MENU TOGGLE
         const menuToggle = document.getElementById('menuToggle');
