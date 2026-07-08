@@ -405,6 +405,136 @@
             color: var(--text-secondary);
         }
 
+        /* ARCHITECTURE SECTION (TCC) */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .arch-card {
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            background: rgba(10, 15, 30, 0.2) !important;
+        }
+        .arch-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+        .arch-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(20, 184, 166, 0.08);
+            color: var(--color-teal);
+            font-size: 1.15rem;
+            border: 1px solid rgba(20, 184, 166, 0.15);
+            flex-shrink: 0;
+        }
+        .arch-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+        .arch-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .flow-step {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            text-align: left;
+        }
+        .step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-indigo);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-family: var(--font-mono);
+            box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+        }
+        .step-desc strong {
+            display: block;
+            font-size: 0.82rem;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+        .step-desc p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        .arch-p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .arch-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+        .arch-list li {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 8px;
+            line-height: 1.4;
+        }
+        .arch-list i {
+            margin-top: 3px;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        .math-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .formula {
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            color: var(--color-emerald);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .formula-desc {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 1024px) {
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* ENERGY COMPARISON & GREEN IT */
         .energy-comparison-grid {
             display: grid;
@@ -1830,6 +1960,7 @@
             
             <ul class="nav-links" id="navLinks">
                 <li><a href="#hero">Início</a></li>
+                <li><a href="#arquitetura">Arquitetura</a></li>
                 <li><a href="#dashboard">NOC Dashboard</a></li>
                 <li><a href="#energia">Eficiência</a></li>
                 <li><a href="#topologia">Topologia</a></li>
@@ -3315,6 +3446,7 @@
             searchableItems = [];
             
             // Add sections
+            searchableItems.push({ name: "Seção: Arquitetura Científica (TCC)", type: "seção", link: "#arquitetura" });
             searchableItems.push({ name: "Seção: Dashboard de Monitoramento", type: "seção", link: "#dashboard" });
             searchableItems.push({ name: "Seção: Eficiência Energética e Custos", type: "seção", link: "#energia" });
             searchableItems.push({ name: "Seção: Topologia Lógica de Rede", type: "seção", link: "#topologia" });
@@ -3522,6 +3654,7 @@
                         printToTerminal('  storage-check - Status ZFS Pool e integridade SMART dos discos.');
                         printToTerminal('  green-metrics - Relatório OpEx e eficiência de consumo energético.');
                         printToTerminal('  matrix        - Toggles digital code rain screen visualization.');
+                        printToTerminal('  vigi-logs     - Exibe logs de eventos Windows em tempo real (Modo LIVE).');
                         printToTerminal('  help          - Exibe este menu de ajuda.');
                         printToTerminal('  clear         - Limpa os logs da tela do terminal.');
                         break;
@@ -3908,6 +4041,40 @@
         if (vigiToken) {
             setTimeout(startVigiPolling, 500);
         }
+
+        // ==========================================
+        // 12. THEME SWITCHER CONTROLLER
+        // ==========================================
+        function toggleThemeMenu() {
+            document.getElementById('themeMenu').classList.toggle('active');
+        }
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('vigi_theme', themeName);
+            document.getElementById('themeMenu').classList.remove('active');
+            
+            // Re-render canvas backgrounds to match colors if active
+            if (typeof initMesh === 'function') {
+                // Resize or refresh canvas
+                const canvas = document.getElementById('meshCanvas');
+                if (canvas) {
+                    const ctx = canvas.getContext('2d');
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+        }
+        // Load theme from storage
+        const savedTheme = localStorage.getItem('vigi_theme') || 'noc-dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // Close menu on click outside
+        window.addEventListener('click', (e) => {
+            const switcher = document.querySelector('.theme-switcher');
+            if (switcher && !switcher.contains(e.target)) {
+                const menu = document.getElementById('themeMenu');
+                if (menu) menu.classList.remove('active');
+            }
+        });
     </script>
     <!-- VIGI NOC LINK CONNECTION MODAL -->
     <div class="vigi-modal" id="vigiModal">
